@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50%;
+  padding: 20px;
+  margin-top: 1em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
+  font-family: Inter, sans-serif;
+  font-size: 1vw;
+  border-radius: 5px;
+}
+
+.searchLogo {
+  height: 2em;
+  width: 2em;
+}
