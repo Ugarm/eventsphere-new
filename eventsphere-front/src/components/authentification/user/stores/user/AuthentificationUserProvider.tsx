@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode } from "react";
-import { loginUserData, registerUserData } from "../../types/types";
+import { loginUserData, registerUserData } from "../../../types/types";
 import { instance } from "../../../../../axios/axios";
 
 interface AuthentificationUserContextProps {
@@ -14,7 +14,7 @@ interface AuthentificationUserContextType {
   logout: () => Promise<void>;
 }
 
-const AuthentificationUserContext = createContext<AuthentificationUserContextType | undefined>(undefined);
+const AuthentificationUserContext = createContext<Partial<AuthentificationUserContextType>>({});
 
 const AuthentificationUserProvider = ({ children }: AuthentificationUserContextProps) => {
   const [isAuthentificated, setIsAuthentificated] = useState(false); // État d'authentification

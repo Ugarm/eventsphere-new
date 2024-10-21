@@ -7,7 +7,7 @@ const SearchBar = () => {
             <h1 className={styles.title}>Event Sphere la plateforme de votre événement</h1>
             <p className={styles.subtitle}>Découvrez les événements qui vous correspondent.</p>
             <div className={styles.searchInputContainer}>
-                <input type="text" placeholder="" className={styles.searchInput} />
+                <input type="text" placeholder="Rechercher un événement" className={styles.searchInput} />
                 <Button text="Rechercher"/>
             </div>
         </div>

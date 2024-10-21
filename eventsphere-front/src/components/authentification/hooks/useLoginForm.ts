@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useAuthentificationContext } from "../../../hooks/useFunctionContext";
-import { loginUserData } from "../types/types";
+
 import { notify } from "../../../components/common/notification/Notification";
 import { AuthentificationUserContext } from "../../authentification/user/stores/user/AuthentificationUserProvider";
 import {useContext} from "react";
@@ -44,7 +44,7 @@ const useLoginForm = (navigate: (path: string) => void) => {
     console.log("Données de connexion :", data);
     mutate(data, {
       onSuccess: () => {
-        setIsAuthentificated(true);
+        setIsAuthentificated?.(true);
         console.log("Connexion réussie !");
         navigate('/'); // Redirection après connexion réussie
       },

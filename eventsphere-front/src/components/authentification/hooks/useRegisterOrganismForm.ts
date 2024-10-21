@@ -10,7 +10,7 @@ const useRegisterOrganismForm = () => {
   const { signupOrganism } = useAuthentificationContext();
 
   const schema = yup.object({
-    
+
   });
 
   const {

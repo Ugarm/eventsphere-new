@@ -275,5 +275,4 @@ class Meetup
         $this->address = $address;
         return $this;
     }
-
 }

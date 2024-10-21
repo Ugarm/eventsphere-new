@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @extends ServiceEntityRepository<Users>
@@ -16,5 +17,14 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, Users::class);
     }
 
-    // Ajoutez vos méthodes personnalisées ici
+    public function findOrDie(int $userId): Users
+    {
+        $user = parent::find($userId);
+
+        if (! $user) {
+            throw new NotFoundHttpException('no user found for id ' . $userId);
+        }
+
+        return $user;
+    }
 }

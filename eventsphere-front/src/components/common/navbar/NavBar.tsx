@@ -40,24 +40,31 @@ const NavBar = () => {
             >
                 {!navIsOpen ? <GiHamburgerMenu size="2rem" /> : <IoClose size="2rem" />}
             </div>
-            <nav className={navIsOpen ? `${styles.containerNavbarLinks} ${styles.containerNavbarLinksActive}` : styles.containerNavbarLinks}>
-                <select className={styles.languageSelector} onChange={handleLanguageChange}>
-                    <option className={styles.french} value="fr">Français</option>
-                    <option className={styles.english} value="en">English</option>
-                </select>
-                <Link className={`${styles.navLink} ${location.pathname === '/meetups' ? styles.active : ''}`} to="/meetups">Événements</Link>
-                {!isAuthentificated && (
-                    <>
-                        <Link className={`${styles.navLink} ${location.pathname === '/register' ? styles.active : ''}`} to="/register">Inscription</Link>
-                        <Link className={`${styles.navLink} ${location.pathname === '/login' ? styles.active : ''}`} to="/login">Connexion</Link>
-                    </>
-                )}
-                {isAuthentificated && (
-                    <button className={styles.navLink} onClick={handleLogout}>Déconnexion</button>
-                )}
+            <nav
+                className={navIsOpen ? `${styles.containerNavbarLinks} ${styles.containerNavbarLinksActive}` : styles.containerNavbarLinks}>
+                <div className={styles.languageSelectorContainer}>
+                    <select className={styles.languageSelector} onChange={handleLanguageChange}>
+                        <option className={styles.french} value="fr">Français</option>
+                        <option className={styles.english} value="en">English</option>
+                    </select>
+                </div>
+                    <Link className={`${styles.navLink} ${location.pathname === '/meetups' ? styles.active : ''}`}
+                          to="/meetups">Événements</Link>
+                    {!isAuthentificated && (
+                        <>
+                            <Link
+                                className={`${styles.navLink} ${location.pathname === '/register' ? styles.active : ''}`}
+                                to="/register">Inscription</Link>
+                            <Link className={`${styles.navLink} ${location.pathname === '/login' ? styles.active : ''}`}
+                                  to="/login">Connexion</Link>
+                        </>
+                    )}
+                    {isAuthentificated && (
+                        <button className={styles.navLink} onClick={handleLogout}>Déconnexion</button>
+                    )}
             </nav>
         </div>
-    );
+);
 };
 
 export default NavBar;

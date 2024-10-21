@@ -1,16 +1,17 @@
-export interface UserType {
+type registerUserData = {
   email: string;
   lastname: string;
   firstname: string;
   username: string;
   address: string;
+  ip_address?: string,
   city: string;
   postal_code: string;
   phone_number: string;
   password: string;
+  confirm_password: string
   terms_accepted: boolean;
-  newsletter_subscribed: boolean;
-  role: string;
+  newsletter_subscribed?: boolean;
 }
 
 type loginUserData = {
@@ -45,4 +46,4 @@ type loginOrganismData = {
 }
 
 
-export type { loginUserData, loginOrganismData, registerOrganismData};
+

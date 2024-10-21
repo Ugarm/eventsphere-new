@@ -2,12 +2,13 @@
 
 namespace App\Controller\API;
 
+use App\Services\ErrorHandler;
 use Exception;
 use App\Managers\MeetupManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MeetupController extends AbstractController
 {
@@ -27,15 +28,9 @@ class MeetupController extends AbstractController
     {
         // Execute meetup creation method
         try {
-            $response = $this->meetupManager->createMeetup($request);
-        } catch (\Exception $e) {
-            return new JsonResponse([
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ]);
+            return $this->meetupManager->createMeetup($request);
+        } catch (Exception $e) {
+            return ErrorHandler::handleException($e);
         }
-
-        return $response;
     }
-
 }

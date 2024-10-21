@@ -3,6 +3,8 @@
 namespace App\Controller\API;
 
 use App\Managers\SessionManager;
+use App\Services\ErrorHandler;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,11 +29,8 @@ class LoginController extends AbstractController
         // Execute login method
         try {
             $response = $this->sessionManager->login(json_decode($request->getContent()));
-        } catch (\Exception $e) {
-            return new JsonResponse([
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ]);
+        } catch (Exception $e) {
+            return ErrorHandler::handleException($e);
         }
 
         // Return the right data if everything is alright, else return an error

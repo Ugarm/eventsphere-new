@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import { useRegisterForm } from "../../../hooks/useRegisterForm.js";
-import { registerUserData } from "../../../types/types.js";
+import { registerUserData } from "../../../types/types";
 import styles from "./registerFormUser.module.scss";
 import GroupControls from "../../../../common/groupControls/GroupControls.js";
 import { IoInformationCircleOutline } from "react-icons/io5";
-import React, { useState } from "react";
+import { useState } from "react";
 
 
 const RegisterFormUser = () => {
@@ -151,7 +151,7 @@ const RegisterFormUser = () => {
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'En cours...' : 'Submit'}
+          {loading ? 'En cours...' : 'S\'inscrire'}
         </button>
       </form>
   );

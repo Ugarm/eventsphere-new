@@ -1,7 +1,7 @@
 import styles from "./homepage.module.scss";
-import EventCard from "../components/eventhomecard/EventCardHome.tsx";
-import Discovery from "../components/discovery/Discovery.tsx";
-import Carousel from "../components/carousel/Carousel.tsx";
+import EventCard from "../components/eventhomecard/EventCardHome";
+import Discovery from "../components/discovery/Discovery";
+import Carousel from "../components/carousel/Carousel";
 
 const HomePage = () => {
   return (

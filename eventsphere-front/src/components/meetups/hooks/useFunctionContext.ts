@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { meetupContext } from "../stores/MeetupProvider";
-import { eventContext } from "../stores/EventProvider.tsx";
+import { eventContext } from "../stores/EventProvider";
 
 const useMeetupContext = () => {
   const context = useContext(meetupContext);

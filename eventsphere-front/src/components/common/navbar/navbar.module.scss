@@ -41,9 +41,14 @@
 
   &Links {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 40%;
+    .languageSelectorContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     .languageSelector {
       font-size: 1vw;
@@ -62,6 +67,7 @@
       color: #000000;
       font-family: Inter, sans-serif;
       font-size: 1vw;
+      text-align: center;
       &:nth-child(4) {
         color: white;
         border-radius: 8px;

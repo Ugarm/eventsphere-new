@@ -8,7 +8,7 @@ const images = [beachImage, concertImage];
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<number | null>(null);
   const delay = 5000; // 5000ms -> 5 seconds
 
   useEffect(() => {

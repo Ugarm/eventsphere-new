@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -66,6 +68,17 @@ class Users implements UserInterface, \Symfony\Component\Security\Core\User\Pass
     // New phone_number property
     #[ORM\Column(length: 20, nullable: true)] // Adjust length as needed
     private ?string $phone_number = null;
+
+    /**
+     * @var Collection<int, Attendees>
+     */
+    #[ORM\OneToMany(targetEntity: Attendees::class, mappedBy: 'users', orphanRemoval: true)]
+    private Collection $attendee;
+
+    public function __construct()
+    {
+        $this->attendee = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -285,6 +298,36 @@ class Users implements UserInterface, \Symfony\Component\Security\Core\User\Pass
     public function setPhoneNumber(?string $phone_number): self
     {
         $this->phone_number = $phone_number;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Attendees>
+     */
+    public function getAttendee(): Collection
+    {
+        return $this->attendee;
+    }
+
+    public function addAttendee(Attendees $attendee): static
+    {
+        if (!$this->attendee->contains($attendee)) {
+            $this->attendee->add($attendee);
+            $attendee->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(Attendees $attendee): static
+    {
+        if ($this->attendee->removeElement($attendee)) {
+            // set the owning side to null (unless already changed)
+            if ($attendee->getUsers() === $this) {
+                $attendee->setUsers(null);
+            }
+        }
 
         return $this;
     }

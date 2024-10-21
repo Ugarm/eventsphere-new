@@ -5,29 +5,30 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useAuthentificationContext } from "../../../hooks/useFunctionContext";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import {ObjectSchema} from "yup";
+// import axios from "axios";
 
-interface IpResponse {
-  ip: string;
-}
+// interface IpResponse {
+//   ip: string;
+// }
 
 const useRegisterForm = () => {
   console.log('useRegisterForm called');
   const { signup } = useAuthentificationContext();
   const navigate = useNavigate();
-  const getUserIpAddress = async (): Promise<string | null> => {
-    console.log('Fetching IP Address...');
-    try {
-      const response = await axios.get<IpResponse>('https://api.ipify.org?format=json');
-      console.log('IP Address fetched:', response.data.ip);
-      return response.data.ip;
-    } catch (error) {
-      console.error("Error fetching IP address:", error);
-      return null;
-    }
-  };
+  // const getUserIpAddress = async (): Promise<string | null> => {
+  //   console.log('Fetching IP Address...');
+  //   try {
+  //     const response = await axios.get<IpResponse>('https://api.ipify.org?format=json');
+  //     console.log('IP Address fetched:', response.data.ip);
+  //     return response.data.ip;
+  //   } catch (error) {
+  //     console.error("Error fetching IP address:", error);
+  //     return null;
+  //   }
+  // };
 
-  const schema = yup.object({
+  const schema: ObjectSchema<registerUserData>= yup.object({
     lastname: yup.string().required("Ce champ est requis"),
     firstname: yup.string().required("Ce champ est requis"),
     username: yup.string().required("Ce champ est requis"),
@@ -40,7 +41,7 @@ const useRegisterForm = () => {
     confirm_password: yup.string().required("Ce champ est requis").oneOf([yup.ref("password")], "Les mots de passe ne correspondent pas"),
     terms_accepted: yup.bool().oneOf([true], "Vous devez accepter les conditions générales").required(),
     newsletter_subscribed: yup.bool().optional(),
-    ip_address: yup.string(),
+    ip_address: yup.string().optional()
   });
 
   const { handleSubmit, register, formState: { errors } } = useForm<registerUserData>({ resolver: yupResolver(schema) });
@@ -48,7 +49,7 @@ const useRegisterForm = () => {
   console.log('Registered fields:', Object.keys(register));
 
   const { mutate } = useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data: registerUserData) => {
       console.log('Calling signup with:', data);
       return signup(data);
     },
